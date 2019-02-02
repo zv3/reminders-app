@@ -1,4 +1,9 @@
 language: node_js
+#env:
+#  global:
+#    # include $HOME/.local/bin for `aws`
+#    - PATH=$HOME/.local/bin:$PATH
+
 cache:
   yarn: true
   directories:
@@ -16,22 +21,34 @@ branches:
 before_install:
   - npm install -g yarn --cache-min 999999999
   - sudo apt-get install -y -q tree
+  - pip install --user awscli
 install:
   - yarn
 script:
   - echo "Temporarily skipping tests"
 before_deploy:
   - yarn build
-  - tree dist
+  - tree build
 deploy:
+  # Control deployment by setting a value for `on`. Setting the `branch`
+  # option to `master` means Travis will only attempt a deployment on
+  # builds of your repo's master branch (e.g., after you merge a PR).
+  on:
+    branch: master
   provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+  # You can refer to environment variables from Travis repo settings!
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  # Name of the S3 bucket to which your site should be uploaded.
   bucket: dzv3
-  endpoint: dzv3.s3-website-us-east-1.amazonaws.com
   upload-dir: reminders-app
-  local-dir: build
-  skip_cleanup: true
-  region: us-east-1
   acl: public_read
   detect_encoding: true
+  # Prevent Travis from deleting your built site so it can be uploaded.
+  skip_cleanup: true
+  # Path to a directory containing your built site.
+  local_dir: build
+  # Set the Cache-Control header.
+  cache_control: "max-age=21600"
+#after_success:
+#  - aws s3 sync build/ s3://dzv3/reminders-app/ --delete --acl public-read
