@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zv3/reminders-app.svg?branch=master)](https://travis-ci.org/zv3/reminders-app)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
