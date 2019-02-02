@@ -1,0 +1,133 @@
+.date-input-sel
+  &__input
+    cursor: pointer
+
+  &__input-icon
+    background: none
+    color: #1290e8
+
+  &__input-field
+    border-left: 0
+    color: #1290e8
+    font-size: 12px
+    font-weight: bold
+    line-height: 19px
+    padding-left: 0
+
+  &__popup
+    position: relative
+
+  &__popup-body
+    display: flex
+    flex-direction: column
+
+  &__popup-block-separator
+    align-self: center
+    border-left: 1px solid #ebeced
+    height: 100%
+    margin-left: 7px
+    margin-right: 0
+    width: 9px
+    border-top: 0
+
+  &__popup-body
+    display: flex
+
+  &__popup-footer
+    justify-content: flex-end
+    display: flex
+    margin-top: 30px
+
+  &__popup-inner
+    background: #fff
+    border-radius: 5px
+    box-shadow: 0 14px 85px rgba(0, 0, 0, .14), 0 -3px 18px rgba(0, 0, 0, .05)
+    display: none
+    min-width: 256px
+    padding: 6px
+    position: absolute
+    top: 10px
+    z-index: 1
+
+    &:after
+      bottom: 100%
+      border-left: 5px solid transparent
+      border-right: 6px solid transparent
+      border-bottom: 9px solid #fff
+      content: " "
+      height: 0
+      left: 30px
+      position: absolute
+      pointer-events: none
+      width: 0
+      z-index: 10
+
+  &__title
+    font-size: 15px
+
+  &__week-header
+
+  &__week-row
+
+  &__cell
+
+  .week-header__day
+    border: none
+
+  .cal-grid
+    border-left: 0
+
+  .cal-grid-cell
+    align-items: center
+    border: 0
+    cursor: pointer
+    display: flex
+    justify-content: center
+    height: 28px
+    width: 40px
+
+    &:hover:not(.cal-grid-cell--active)
+      .cal-grid-cell__content
+        background: #d6d6d6
+
+    &--active, &:active, &:focus
+      .cal-grid-cell__content
+        background: #1290e8
+        color: #fff
+
+  .cal-grid-cell__content
+    align-items: center
+    border-radius: 2px
+    display: flex
+    height: 2.2rem
+    justify-content: center
+    line-height: 1
+    width: 2.2rem
+
+  .cal-grid-cell__label
+    padding: 0
+
+  .month-selector
+    height: 33px
+    justify-content: center
+
+  .month-selector__link
+    font-size: 14px
+
+  .month-selector__label
+    font-size: 14px
+    width: 120px
+
+  .week-header
+    text-align: center
+
+  .week-header__day
+    width: auto
+
+  &__time-header
+    align-items: center
+    display: flex
+    height: 33px
+
+.time-input
+  display: flex

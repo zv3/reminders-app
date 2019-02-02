@@ -1,0 +1,37 @@
+.cal-grid
+  border-left: 1px solid #e0e0e0
+
+.cal-grid-row
+  display: flex
+  flex-direction: row
+
+.cal-grid-cell
+  border-right: 1px solid #e0e0e0
+  border-bottom: 1px solid #e0e0e0
+  flex: 1 0 20px
+  height: 155px
+  width: 150px
+
+  &__header
+    align-items: center
+    display: flex
+    height: 26px
+    justify-content: space-between
+
+  &__label
+    padding-left: 5px
+
+  &__events
+    padding: 0 3px
+
+  &__add-btn
+    display: none
+    font-size: 16px
+    line-height: 0
+
+    &:link, &:hover
+      text-decoration: none
+
+  &:hover
+    .cal-grid-cell__add-btn
+      display: block

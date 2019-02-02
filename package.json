@@ -1,0 +1,47 @@
+{
+  "name": "reminders-app",
+  "author": "Diego Zacarias <dzv3@me.com>",
+  "homepage": "https://dzv3.gitlab.io/reminders-app",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.13",
+    "@fortawesome/free-solid-svg-icons": "^5.7.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "bootstrap": "^4.2.1",
+    "lodash": "^4.17.11",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
+    "react-scripts": "2.1.3",
+    "react-select": "^2.3.0",
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {
+    "enzyme": "^3.8.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "resolutions": {
+    "terser": "3.14.1"
+  }
+}

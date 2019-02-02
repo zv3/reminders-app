@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "modules": true,
+      "experimentalObjectRestSpread": true,
+      "templateStrings": true,
+      "jsx": true
+    }
+  },
+  "globals": {
+    "require": true,
+    "Dispatch": true,
+    "Middleware": true,
+    "NextMiddleware": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": ["airbnb"],
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "no-debugger": 1,
+    "linebreak-style": 0,
+    "import/first": 2,
+    "no-undef": 0,
+    "react/react-in-jsx-scope": 0
+  }
+}

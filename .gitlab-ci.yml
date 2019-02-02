@@ -1,0 +1,31 @@
+# GitLab uses docker in the background, so we need to specify the
+# image versions. This is useful because we're freely to use
+# multiple node versions to work with it. They come from the docker
+# repo.
+# Uses NodeJS V 9.4.0
+image: node:9.4.0
+
+variables:
+  PUBLIC_URL: /reminders-app
+
+# Cache node modules - speeds up future builds
+cache:
+  paths:
+    - node_modules
+    - .yarn
+
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - yarn
+    - yarn build
+    - rm -rf public
+    - mv build public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
