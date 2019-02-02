@@ -1,0 +1,35 @@
+language: node_js
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - .yarn
+notifications:
+  email:
+    on_failure: always
+node_js:
+  - 'node'
+branches:
+  only:
+    - "master"
+
+before_install:
+  - npm install -g yarn --cache-min 999999999
+  - sudo apt-get install -y -q tree
+install:
+  - yarn
+before_deploy:
+  - yarn build
+  - tree dist
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: dzv3
+  endpoint: dzv3.s3-website-us-east-1.amazonaws.com
+  upload-dir: reminders-app
+  local-dir: build
+  skip_cleanup: true
+  region: us-east-1
+  acl: public_read
+  detect_encoding: true
