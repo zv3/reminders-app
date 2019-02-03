@@ -7,14 +7,14 @@ export default function TimePicker({ dt, onChangeHours, onChangeMinutes }) {
   const hourOptions = [...Array(24)].map((_, hr) => (
     <option key={hr} value={hr}>{ hr < 10 ? `0${hr}` : hr }</option>
   ));
-  const minOptions = [...Array(59)].map((_, min) => (
-    <option key={min} value={min}>{ min }</option>
+  const minOptions = [...Array(60)].map((_, min) => (
+    <option key={min} value={min}>{ min < 10 ? `0${min}` : min }</option>
   ));
 
   return (
     <div className="time-picker">
       <div className="time-picker__cell">
-        <div className="time-picker__header">Hr</div>
+        <div className="time-picker__header">Hour</div>
         <select
           className="custom-select"
           id="time-picker-hr"
@@ -25,7 +25,7 @@ export default function TimePicker({ dt, onChangeHours, onChangeMinutes }) {
         </select>
       </div>
       <div className="time-picker__cell">
-        <div className="time-picker__header">Min</div>
+        <div className="time-picker__header">Minute</div>
         <select
           className="custom-select"
           id="time-picker-min"

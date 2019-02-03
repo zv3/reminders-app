@@ -109,6 +109,7 @@ class DateInputSelector extends Component {
                 />
               </div>
               <div className="date-input-sel__popup-body-block">
+                <hr className="date-input-sel__popup-block-separator" />
                 <TimePicker
                   dt={pickerDt}
                   onChangeHours={this.onChangeHours}
