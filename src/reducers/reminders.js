@@ -1,55 +1,86 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { ADD_REMINDER, EDIT_REMINDER, REMOVE_REMINDER } from '../constants/ActionTypes';
+import { CREATE_REMINDER, UPDATE_REMINDER, DELETE_REMINDER } from '../constants/ActionTypes';
 
+const mappedEntries = {};
 let lastId = 0;
-const uniqIdGen = () => {
+
+/**
+ * Generate a random unique value to be used as a identifiers.
+ *
+ * @returns {number}
+ */
+function uniqIdGen() {
   lastId += 1;
 
   return lastId;
-};
+}
 
-const initialState = {};
+/**
+ * Get the timestamp that corresponds to the start of the day of the given date object.
+ *
+ * @param dt {Date}
+ * @returns {int}
+ */
+function getStartOfDay(dt) {
+  return (new Date(dt)).setHours(0, 0, 0, 0);
+}
 
-export default function reminders(state = initialState, { type, reminder }) {
+export default function reminders(state = {}, { type, reminder }) {
   if (!reminder) {
     return state;
   }
 
   const newState = cloneDeep(state);
-  const objKey = (new Date(reminder.dt)).setHours(0, 0, 0, 0);
-  const entries = state[objKey] || [];
+  const startOfDay = getStartOfDay(reminder.dt);
+  const entries = state[startOfDay] || [];
 
   switch (type) {
-    case ADD_REMINDER:
-      entries.push({ ...reminder, id: uniqIdGen() });
+    case CREATE_REMINDER: {
+      const newId = uniqIdGen(); // Generate a new unique id to be used as id.
+
+      entries.push({ ...reminder, id: newId });
+      mappedEntries[newId] = startOfDay; // store the `startOfDay` that this entry maps to.
 
       break;
-    case EDIT_REMINDER: {
-      if (reminder && reminder.id) {
+    }
+    case UPDATE_REMINDER:
+      if (reminder.id) {
         const idx = entries.findIndex(e => e.id === reminder.id);
 
-        entries.splice(idx, 1, reminder);
+        if (idx === -1 && mappedEntries[reminder.id]) {
+          // the reminder's date has been changed and therefore should be removed from the
+          // old date's entries and added to the new date's entries.
+          const oldKey = mappedEntries[reminder.id];
+          const oldIdx = newState[oldKey].findIndex(e => e.id === reminder.id);
+
+          newState[oldKey].splice(oldIdx, 1);
+          entries.push(reminder);
+        } else {
+          // the reminders date hasn't been changed, we can do an in place replacement.
+          entries.splice(idx, 1, reminder);
+        }
+
+        mappedEntries[reminder.id] = startOfDay; // remap this reminder to it's `startOfDay` value.
 
         break;
       }
 
       throw new Error('Invalid `reminder` argument passed in');
-    }
-    case REMOVE_REMINDER: {
-      if (reminder && reminder.id) {
+    case DELETE_REMINDER:
+      if (reminder.id) {
         const idx = entries.findIndex(e => e.id === reminder.id);
 
         entries.splice(idx, 1);
+        delete mappedEntries[reminder.id];
 
         break;
       }
 
       throw new Error('Invalid `reminder` argument passed in');
-    }
     default:
   }
 
-  newState[objKey] = entries.sort((a, b) => a.dt - b.dt);
+  newState[startOfDay] = entries.sort((ra, rb) => ra.dt - rb.dt);
 
   return newState;
 }
