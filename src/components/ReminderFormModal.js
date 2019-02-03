@@ -35,6 +35,8 @@ class Modal extends Component {
   constructor(props) {
     super(props);
 
+    this.titleInputRef = React.createRef();
+
     this.state = {
       reminder: {
         ...props.reminder,
@@ -48,6 +50,10 @@ class Modal extends Component {
         },
       },
     };
+  }
+
+  componentDidMount() {
+    this.titleInputRef.current.focus(); // auto-focus the title input.
   }
 
   getModalTitle() {
@@ -101,7 +107,7 @@ class Modal extends Component {
   render() {
     const { onClickCancelBtn, onClickDeleteBtn } = this.props;
     const { reminder, validation } = this.state;
-    const currentColorValue = COLORS.find(c => c.value === reminder.color)
+    const currentColorValue = COLORS.find(c => c.value === reminder.color);
 
     return (
       <div>
@@ -131,6 +137,7 @@ class Modal extends Component {
                             onChange={this.onChangeTitleInput}
                             maxLength="30"
                             required
+                            ref={this.titleInputRef}
                           />
                           { !validation.fields.title ? <div className="invalid-feedback">Please add a title for this entry.</div> : '' }
                         </div>
