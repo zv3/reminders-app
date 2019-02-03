@@ -162,11 +162,11 @@ class Modal extends Component {
                 </form>
               </div>
               <div className="modal-footer">
+                <button type="button" className="btn btn-secondary font-weight-bold" onClick={onClickCancelBtn}>Cancel</button>
                 { reminder && reminder.id
                   ? <button type="button" className="btn btn-danger font-weight-bold" onClick={onClickDeleteBtn}>Delete</button>
                   : ''
                 }
-                <button type="button" className="btn btn-secondary font-weight-bold" onClick={onClickCancelBtn}>Cancel</button>
                 <button type="button" className="btn btn-primary font-weight-bold" onClick={this.onClickSaveBtn}>Save</button>
               </div>
             </div>
