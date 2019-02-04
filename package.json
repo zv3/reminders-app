@@ -1,7 +1,7 @@
 {
   "name": "reminders-app",
   "author": "Diego Zacarias <dzv3@me.com>",
-  "homepage": "https://dzv3.gitlab.io/reminders-app",
+  "homepage": "http://dzv3.s3-website-us-east-1.amazonaws.com/reminders-app/",
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { REMINDER_PROP_TYPES, COLORS } from '../constants/consts';
+import { getDummyReminder } from '../utils/reminder';
 import DateInputSelector from './DateInputSelector';
 
 const dot = (color = '#ccc') => ({
@@ -192,11 +193,7 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  reminder: {
-    title: '',
-    dt: new Date(),
-    color: '',
-  },
+  reminder: getDummyReminder(),
 };
 
 export default Modal;

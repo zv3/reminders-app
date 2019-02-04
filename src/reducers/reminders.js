@@ -1,29 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep';
+import { getUniqId } from '../utils/uniqueId';
+import { getStartOfDay } from '../utils/datetime';
+
 import { CREATE_REMINDER, UPDATE_REMINDER, DELETE_REMINDER } from '../constants/ActionTypes';
 
 const mappedEntries = {};
-let lastId = 0;
-
-/**
- * Generate a random unique value to be used as a identifiers.
- *
- * @returns {number}
- */
-function uniqIdGen() {
-  lastId += 1;
-
-  return lastId;
-}
-
-/**
- * Get the timestamp that corresponds to the start of the day of the given date object.
- *
- * @param dt {Date}
- * @returns {int}
- */
-function getStartOfDay(dt) {
-  return (new Date(dt)).setHours(0, 0, 0, 0);
-}
 
 export default function reminders(state = {}, { type, reminder }) {
   if (!reminder) {
@@ -36,7 +17,7 @@ export default function reminders(state = {}, { type, reminder }) {
 
   switch (type) {
     case CREATE_REMINDER: {
-      const newId = uniqIdGen(); // Generate a new unique id to be used as id.
+      const newId = getUniqId(); // Generate a new unique id to be used as id.
 
       entries.push({ ...reminder, id: newId });
       mappedEntries[newId] = startOfDay; // store the `startOfDay` that this entry maps to.

@@ -1,13 +1,9 @@
 import { SHOW_MODAL, HIDE_MODAL } from '../constants/ActionTypes';
-import { DEFAULT_COLOR_VALUE } from '../constants/consts';
+import { getDummyReminder } from '../utils/reminder';
 
 const initialState = {
   show: false,
-  reminder: {
-    title: '',
-    dt: new Date(),
-    color: DEFAULT_COLOR_VALUE,
-  },
+  reminder: getDummyReminder(),
 };
 
 const modalVisibility = (state = initialState, action) => {
