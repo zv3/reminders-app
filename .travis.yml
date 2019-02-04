@@ -1,8 +1,4 @@
 language: node_js
-#env:
-#  global:
-#    # include $HOME/.local/bin for `aws`
-#    - PATH=$HOME/.local/bin:$PATH
 
 cache:
   yarn: true
@@ -21,11 +17,10 @@ branches:
 before_install:
   - npm install -g yarn --cache-min 999999999
   - sudo apt-get install -y -q tree
-  - pip install --user awscli
+
 install:
   - yarn
-script:
-  - echo "Temporarily skipping tests"
+
 before_deploy:
   - yarn build
   - tree build
@@ -50,5 +45,3 @@ deploy:
   local_dir: build
   # Set the Cache-Control header.
   cache_control: "max-age=21600"
-#after_success:
-#  - aws s3 sync build/ s3://dzv3/reminders-app/ --delete --acl public-read
